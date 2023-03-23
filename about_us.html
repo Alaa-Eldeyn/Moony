@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moony</title>
+  <link rel="icon" href="imgs/LogoIcon.png">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="css/all.min.css">
+  <!-- Style file -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Cairo Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!--===== Header =====-->
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container fluid">
+        <a class="navbar-brand" href="index.html">
+          <div class="logo fw-bold fs-4">
+            <img src="imgs/LogoIcon.png" class="me-1" style="max-width: 50px;">Moony
+          </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item px-3">
+              <a class="nav-link active" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            </li>
+            <li class="nav-item px-3">
+              <a class="nav-link" style="cursor: pointer;" onclick="profileClicked()"><i class="fa-solid fa-user"></i> Profile</a>
+            </li>
+            <li class="nav-item px-3">
+              <a class="nav-link" href="about_us.html"><i class="fa-solid fa-laptop-code"></i> About Us</a>
+            </li>
+          </ul>
+          <div id="login-access" class="mt-2 px-3 px-lg-0">
+            <button class="btn btn-outline-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-whatever="@mdo">Login</button>
+            <button class="btn btn-outline-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-whatever="@mdo">Register</button>
+          </div>
+          <div id="logout-access" class="mt-2 px-3 px-lg-0" style="display: none;">
+            <img class="rounded-circle" id="header-user-image" style="width: 30px; height: 30px;" src="https://via.placeholder.com/30">
+            <strong id="header-username" class="pe-3"></strong>
+            <button id="logoutBtn" onclick="logoutBtn()" class="btn btn-outline-danger rounded-pill">Logout</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!--===== Header =====-->
+
+  <!--===== To Top Button =====-->
+  <div id="toTop" class="btn btn-primary rounded-circle d-flex justify-content-center align-items-center position-fixed" style="width: 45px; height: 45px;"><i class="fa-solid fa-jet-fighter-up"></i></div>
+  <!--===== To Top Button =====-->
+
+  <!--===== Loading Spinner =====-->
+  <div id="spinner-loader" class="rounded bg-secondary position-fixed bg-opacity-50" style="width: fit-content; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 9999;">
+    <div class="lds-hourglass"></div>
+  </div>
+  <!--===== Loading Spinner =====-->
+
+  <!--===== Login Modal =====-->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="loginTitle">Login</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="username-input" class="col-form-label">Username:</label>
+              <input type="text" class="form-control" id="username-input">
+            </div>
+            <div class="mb-3">
+              <label for="password-input" class="col-form-label">Password:</label>
+              <input type="password" class="form-control" id="password-input"></input>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="loginBtn()">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--===== Login Modal =====-->
+
+
+  <!--===== Register Modal =====-->
+  <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="registerTitle">Register</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-2">
+              <label for="register-name-input" class="col-form-label">Your Name:</label>
+              <input type="text" class="form-control" id="register-name-input">
+            </div>
+            <div class="mb-3">
+              <label for="register-name-input" class="col-form-label">Profile picture:</label>
+              <input type="file" class="form-control" id="register-image-input">
+            </div>
+            <div class="mb-3">
+              <label for="register-username-name" class="col-form-label">Username:</label>
+              <input type="text" class="form-control" id="register-username-input">
+            </div>
+            <div class="mb-3">
+              <label for="register-password-input" class="col-form-label">Password:</label>
+              <input type="password" class="form-control" id="register-password-input"></input>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="registerBtn()">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--===== Register Modal =====-->
+
+
+  <!--===== toast alert =====-->
+  <div class="toast position-fixed align-items-center text-bg-success border-0" id="login-success" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body"></div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+  <!--===== toast alert =====-->
+
+
+  <!--===== Create post Modal =====-->
+  <div class="modal fade" id="createPostModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createPostTitle">Create New Post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <input type="text" placeholder="Post Title" class="form-control" id="newPost-title">
+              <input type="hidden" id="post-id-input">
+            </div>
+            <div class="mb-3">
+              <textarea type="text" style="height: 100px; resize: none;" placeholder="Post Body" class="form-control" id="newPost-body"></textarea>
+            </div>
+            <div class="mb-3">
+              <input type="file" class="form-control" id="newPost-image"></input>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="postSubmitBtn" class="btn btn-primary" onclick="createPost()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--===== Create post Modal =====-->
+
+
+  <!--===== Delete Post Modal =====-->
+  <div class="modal fade" id="deletePostModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h6 class="text-start">Are you sure that you want to delete the post?</h6>
+          <input type="hidden" id="delete-post-id-input">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" onclick="deleteBtnClicked()">Yes, Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--===== Delete Post Modal =====-->
+
+
+  <main class="container d-flex justify-content-center align-items-center pt-lg-3">
+    <div class="text-center mt-5" style="font-family: 'Cairo', sans-serif;">
+      <img class="rounded-circle img-thumbnail mb-2" src="imgs/Alaa Eldeyn.jpg" alt="Alaa Eldeyn" style="width: 200px">
+      <h3 class="fw-bold aboutMe-title">About me</h3>
+      <p class="mt-3">My name is Alaa Eldeyn, I'm a Front End Developer 💻.<br>I describe myself as a passionate developer who loves coding ❤️<br>I Created many projects and uploaded them on coding platforms<br>You can view them here ..</p>
+      <div class="about-social d-flex gap-4 justify-content-center align-items-center">
+        <a class="text-dark" href="https://github.com/Alaa-Eldeyn"><i class="fs-2 fa-brands fa-github"></i></a>
+        <a class="text-dark" href="https://www.linkedin.com/in/alaa-eldeyn/"><i class="fs-2 fa-brands fa-linkedin"></i></a>
+        <a class="text-dark" href="https://codepen.io/AlaaEldeyn"><i class="fs-2 fa-brands fa-codepen"></i></a>
+        <a class="text-dark" href="https://www.instagram.com/3lwa88/"><i class="fs-2 fa-brands fa-instagram"></i></a>
+      </div>
+      <div class="d-flex mt-3 gap-2 justify-content-evenly flex-column flex-md-row">
+        <a class="btn btn-outline-danger rounded-pill" href="mailto:alaa.eldeyn@gmail.com">Alaa.eldeyn@gmail.com</a>
+        <a class="btn btn-outline-success rounded-pill" href="">See More Projects <i class="fa-solid fa-angles-right"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/axios.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

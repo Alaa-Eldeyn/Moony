@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moony</title>
+  <link rel="icon" href="imgs/LogoIcon.png">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="css/all.min.css">
+  <!-- Style file -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!--===== Header =====-->
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container fluid">
+        <a class="navbar-brand" href="index.html">
+          <div class="logo fw-bold fs-4">
+            <img src="imgs/LogoIcon.png" class="me-1" style="max-width: 50px;">Moony
+          </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item px-3">
+              <a class="nav-link active" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            </li>
+            <li class="nav-item px-3">
+              <a class="nav-link" style="cursor: pointer;" onclick="profileClicked()"><i class="fa-solid fa-user"></i> Profile</a>
+            </li>
+            <li class="nav-item px-3">
+              <a class="nav-link" href="about_us.html"><i class="fa-solid fa-laptop-code"></i> About Us</a>
+            </li>
+          </ul>
+          <div id="login-access" class="mt-2 px-3 px-lg-0">
+            <button class="btn btn-outline-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-whatever="@mdo">Login</button>
+            <button class="btn btn-outline-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-whatever="@mdo">Register</button>
+          </div>
+          <div id="logout-access" class="mt-2 px-3 px-lg-0" style="display: none;">
+            <img class="rounded-circle" id="header-user-image" style="width: 30px; height: 30px;" src="https://via.placeholder.com/30">
+            <strong id="header-username" class="pe-3"></strong>
+            <button id="logoutBtn" onclick="logoutBtn()" class="btn btn-outline-danger rounded-pill">Logout</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!--===== Header =====-->
+
+  <!--===== To Top Button =====-->
+  <div id="toTop" class="btn btn-primary rounded-circle d-flex justify-content-center align-items-center position-fixed" style="width: 45px; height: 45px;"><i class="fa-solid fa-jet-fighter-up"></i></div>
+  <!--===== To Top Button =====-->
+
+  <!--===== Loading Spinner =====-->
+  <div id="spinner-loader" class="rounded bg-secondary position-fixed bg-opacity-50" style="width: fit-content; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 9999;">
+    <div class="lds-hourglass"></div>
+  </div>
+  <!--===== Loading Spinner =====-->
+
+  <!--===== Login Modal =====-->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="loginTitle">Login</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="username-input" class="col-form-label">Username:</label>
+              <input type="text" class="form-control" id="username-input">
+            </div>
+            <div class="mb-3">
+              <label for="password-input" class="col-form-label">Password:</label>
+              <input type="password" class="form-control" id="password-input"></input>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="loginBtn()">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--===== Login Modal =====-->
+
+
+  <!--===== Register Modal =====-->
+  <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="registerTitle">Register</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-2">
+              <label for="register-name-input" class="col-form-label">Your Name:</label>
+              <input type="text" class="form-control" id="register-name-input">
+            </div>
+            <div class="mb-3">
+              <label for="register-name-input" class="col-form-label">Profile picture:</label>
+              <input type="file" class="form-control" id="register-image-input">
+            </div>
+            <div class="mb-3">
+              <label for="register-username-name" class="col-form-label">Username:</label>
+              <input type="text" class="form-control" id="register-username-input">
+            </div>
+            <div class="mb-3">
+              <label for="register-password-input" class="col-form-label">Password:</label>
+              <input type="password" class="form-control" id="register-password-input"></input>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="registerBtn()">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--===== Register Modal =====-->
+
+
+  <!--===== toast alert =====-->
+  <div class="toast position-fixed align-items-center text-bg-success border-0" id="login-success" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body"></div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+  <!--===== toast alert =====-->
+
+
+  <!--===== Create post Modal =====-->
+  <div class="modal fade" id="createPostModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createPostTitle">Create New Post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <input type="text" placeholder="Post Title" class="form-control" id="newPost-title">
+              <input type="hidden" id="post-id-input">
+            </div>
+            <div class="mb-3">
+              <textarea type="text" style="height: 100px; resize: none;" placeholder="Post Body" class="form-control" id="newPost-body"></textarea>
+            </div>
+            <div class="mb-3">
+              <input type="file" class="form-control" id="newPost-image"></input>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="postSubmitBtn" class="btn btn-primary" onclick="createPost()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--===== Create post Modal =====-->
+
+
+  <!--===== Delete Post Modal =====-->
+  <div class="modal fade" id="deletePostModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h6 class="text-start">Are you sure that you want to delete the post?</h6>
+          <input type="hidden" id="delete-post-id-input">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" onclick="deleteBtnClicked()">Yes, Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--===== Delete Post Modal =====-->
+
+
+  <!--===== Add Post Button =====-->
+  <div id="addPost" class="btn btn-primary rounded-circle position-fixed fw-bold fs-5 shadow" onclick="addBtnClicked()"><i class="fa-solid fa-plus"></i></div>
+  <!--===== Add Post Button =====-->
+
+  <main class="container">
+    <div class="mt-3 row">
+      <div class="col-3 d-none d-lg-block">
+        <!-- identity-box -->
+        <div class="card pt-3 sticky-top top2 top-2">
+          <!-- Profile -->
+          <a class="d-block px-3 text-center text-decoration-none text-dark" href="">
+          <div class="d-flex flex-column align-items-center gap-1">
+            <img class="rounded-circle" src="imgs/Alaa Eldeyn.jpg" alt="Profile picture" style="max-width: 50px;">
+              <div class="profile-name d-flex align-items-center justify-content-center w-100">
+                <div>
+                  <p class="m-0 fw-bold">Alaa Eldeyn</p>
+                  <span style="font-size: 12px;">Front-End Developer</span>
+                </div>
+                <!-- <i class="fa-solid fa-gear"></i> -->
+              </div>
+            </div>
+          </a>
+          <div class="card-body">
+            <hr class="m-0">
+          </div>
+          <!-- // Profile // -->
+          <div class="social">
+            <p class="px-3 text-secondary">Your Social</p>
+            <!-- Github -->
+            <a class="d-block px-3 text-decoration-none py-1 mb-2 text-dark" href="https://github.com/Alaa-Eldeyn">
+              <div class="d-flex align-items-center gap-3">
+                <img class="rounded-circle" src="imgs/github.png" alt="Github" style="max-width: 40px;">
+                <div class="d-flex align-items-center justify-content-between w-100">
+                  <div>
+                    <p class="m-0 fw-bold">Alaa Eldeyn</p>
+                    <span style="font-size: 12px;">Github profile</span>
+                  </div>
+                  <svg class="text-danger" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-2-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6.646 6.24c0-.691.493-1.306 1.336-1.306.756 0 1.313.492 1.313 1.236 0 .697-.469 1.23-.902 1.705l-2.971 3.293V12h5.344v-1.107H7.268v-.077l1.974-2.22.096-.107c.688-.763 1.287-1.428 1.287-2.43 0-1.266-1.031-2.215-2.613-2.215-1.758 0-2.637 1.19-2.637 2.402v.065h1.271v-.07Z"/>
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <!--// Github //-->
+            <!-- Linkedin -->
+            <a class="d-block px-3 text-decoration-none py-1 mb-2 text-dark" href="https://www.linkedin.com/in/alaa-eldeyn/">
+              <div class="d-flex align-items-center gap-3">
+                <img class="rounded-circle" src="imgs/linkedin.png" alt="Linkedin" style="max-width: 40px;">
+                <div class="d-flex align-items-center justify-content-between w-100">
+                  <div>
+                    <p class="m-0 fw-bold">Alaa Eldeyn</p>
+                    <span style="font-size: 12px;">Linkedin profile</span>
+                  </div>
+                  <svg class="text-danger" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-3-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-8.082.414c.92 0 1.535.54 1.541 1.318.012.791-.615 1.36-1.588 1.354-.861-.006-1.482-.469-1.54-1.066H5.104c.047 1.177 1.05 2.144 2.754 2.144 1.653 0 2.954-.937 2.93-2.396-.023-1.278-1.031-1.846-1.734-1.916v-.07c.597-.1 1.505-.739 1.482-1.876-.03-1.177-1.043-2.074-2.637-2.062-1.675.006-2.59.984-2.625 2.12h1.248c.036-.556.557-1.054 1.348-1.054.785 0 1.348.486 1.348 1.195.006.715-.563 1.237-1.342 1.237h-.838v1.072h.879Z"/>
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <!--// Linkedin //-->
+            <!-- CodePen -->
+            <a class="d-block px-3 text-decoration-none py-1 mb-2 text-dark" href="https://codepen.io/AlaaEldeyn">
+              <div class="d-flex align-items-center gap-3">
+                <img class="rounded-circle" src="imgs/codepen.png" alt="CodePen" style="max-width: 40px;">
+                <div class="d-flex align-items-center justify-content-between w-100">
+                  <div>
+                    <p class="m-0 fw-bold">Alaa Eldeyn</p>
+                    <span style="font-size: 12px;">CodePen profile</span>
+                  </div>
+                  <svg class="text-danger" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-1-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002H7.971L6.072 5.385v1.271l1.834-1.318h.065V12h1.312V4.002Z"/>
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <!--// CodePen //-->
+            <!-- Instagram -->
+            <a class="d-block px-3 text-decoration-none py-1 mb-3 text-dark" href="https://www.instagram.com/3lwa88/">
+              <div class="d-flex align-items-center gap-3">
+                <img class="rounded-circle" src="imgs/instagram.png" alt="Instagram" style="max-width: 40px;">
+                <div class="d-flex align-items-center justify-content-between w-100">
+                  <div>
+                    <p class="m-0 fw-bold">Alaa Eldeyn</p>
+                    <span style="font-size: 12px;">Instagram profile</span>
+                  </div>
+                  <svg class="text-danger" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-1-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002H7.971L6.072 5.385v1.271l1.834-1.318h.065V12h1.312V4.002Z"/>
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <!--// Instagram //-->
+          </div>
+        </div>
+        <!--// identity-box //-->
+      </div>
+      <div class="col-12 col-lg-6">
+        <!-- Add Post -->
+        <div id="addPostCard" class="card mb-3">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <img id="main-profile-pic" style="width: 30px; height: 30px; cursor: pointer;" onclick="userClicked()" class="rounded-circle me-2" src="imgs/Alaa Eldeyn.jpg" alt="Profile Picture">
+              <input data-bs-toggle="modal" data-bs-target="#createPostModal" data-bs-whatever="@mdo" class="form-control rounded-5" type="text" placeholder="Add New Post">
+            </div>
+          </div>
+        </div>
+        <!--// Add Post //-->
+        <div id="posts">
+        </div>
+      </div>
+      <div class="col-3 d-none d-lg-block">
+        <div class="card top2 sticky-top">
+          <div class="card-body">
+            <h6>Heros You Must Know ✨</h6>
+            <div class="d-flex align-items-center gap-3 mb-3 mt-2">
+              <img class="rounded-circle" src="imgs/osama.jpg" alt="Osama Elzero" style="max-width: 40px;">
+              <div class="d-flex align-items-center justify-content-between w-100">
+                <div>
+                  <p class="m-0 fw-bold">Osama Elzero</p>
+                  <span style="font-size: 12px;">Elzero Web School</span>
+                </div>
+                <a href="https://www.youtube.com/@ElzeroWebSchool"><i class=" m-0 fa-brands fa-youtube text-danger fs-3"></i></a>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img class="rounded-circle" src="imgs/tarmeez.jpg" alt="Yarob" style="max-width: 40px;">
+              <div class="d-flex align-items-center justify-content-between w-100">
+                <div>
+                  <p class="m-0 fw-bold">Yarob Al Mostafa</p>
+                  <span style="font-size: 12px;">Tarmeez Academy</span>
+                </div>
+                <a href="https://www.youtube.com/@user-py5qp1ez4y"><i class=" m-0 fa-brands fa-youtube text-danger fs-3"></i></a>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img class="rounded-circle" src="imgs/ahmed.jpeg" alt="Ahmed Abo zaid" style="max-width: 40px;">
+              <div class="d-flex align-items-center justify-content-between w-100">
+                <div>
+                  <p class="m-0 fw-bold">Ahmed Abo zaid</p>
+                  <span style="font-size: 12px;">Droos Online</span>
+                </div>
+                <a href="https://www.youtube.com/@DroosOnline4u"><i class=" m-0 fa-brands fa-youtube text-danger fs-3"></i></a>
+              </div>
+            </div>
+            <a class="text-center text-decoration-none d-block" href="">View All</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/axios.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    window.addEventListener("scroll", ()=>{
+      let endOfPage = window.innerHeight + window.pageYOffset >= document.body.scrollHeight
+      if (endOfPage && currentPage < lastPage) {
+        currentPage = currentPage + 1;
+        getPosts(false, currentPage)
+      }
+    })
+  </script>
+</body>
+</html>
